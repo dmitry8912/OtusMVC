@@ -11,7 +11,8 @@ class Router
         $controller_name = "{$path_components[1]}Controller";
         $action_name = $path_components[2];
 
-        $controller_path = implode(DIRECTORY_SEPARATOR,[$_SERVER['DOCUMENT_ROOT'], 'Controllers', "$controller_name.php"]);
+        $controller_path = implode(DIRECTORY_SEPARATOR,[$_SERVER['DOCUMENT_ROOT'],
+            'Controllers', "$controller_name.php"]);
         // Check controller exists.
         if(!file_exists($controller_path)) {
             //redirect to 404
