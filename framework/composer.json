@@ -1,0 +1,21 @@
+{
+  "name": "otus/mvc",
+  "description": "A simple MVC project",
+  "type": "project",
+  "license": "Freeware",
+  "authors": [
+    {
+      "name": "D.Pankrashov",
+      "email": "dmitry8912@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Otus\\Mvc\\Controllers\\": "Controllers/",
+      "Otus\\Mvc\\Core\\": "Core/",
+      "Otus\\Mvc\\Models\\": "Models/",
+      "Otus\\Mvc\\Views\\": "Views/"
+    }
+  }
+}

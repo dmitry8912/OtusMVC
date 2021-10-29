@@ -1,5 +1,7 @@
 <?php
 
+namespace Otus\Mvc\Core;
+
 class View
 {
     static function render(string $view, array $data = []) {

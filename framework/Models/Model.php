@@ -1,5 +1,5 @@
 <?php
-
+namespace Otus\Mvc\Models;
 abstract class Model
 {
     private static array $config = [
@@ -10,16 +10,12 @@ abstract class Model
         'password' => ''
     ];
 
-    protected static $table;
-
     private static $connectonInstance;
-
-    private $isInserted = false;
 
     private static function getInstance() {
         if(self::$connectonInstance === null)
         {
-            self::$connectonInstance = new PDO(sprintf("%s:host=%s;dbname=%s",
+            self::$connectonInstance = new \PDO(sprintf("%s:host=%s;dbname=%s",
                                                         self::$config['type'],
                                                         self::$config['host'],
                                                         self::$config['db']),
@@ -34,13 +30,15 @@ abstract class Model
         return self::$connectonInstance;
     }
 
-    private static function getTableName() {
-        return static::$table;
-    }
-
     public function Model()
     {
         self::getInstance();
+    }
+
+    protected static $table;
+
+    private static function getTableName() {
+        return static::$table;
     }
 
     public static function get($parameter, $value)
@@ -48,7 +46,7 @@ abstract class Model
         $modelName = static::class;
         $model = new $modelName();
         $tableName = self::getTableName();
-        $sql = "SELECT * FROM $tableName where $parameter = ? limit 1";
+        $sql = "SELECT * FROM $tableName where username = ? limit 1";
         $statement = self::getInstance()->prepare($sql);
         $statement->execute([$value]);
         $result = $statement->fetchAll();
@@ -61,6 +59,8 @@ abstract class Model
         $model->isInserted = true;
         return $model;
     }
+
+    private $isInserted = false;
 
     public function save()
     {
@@ -103,6 +103,5 @@ abstract class Model
         $sql = "DELETE FROM $tableName where id = ?";
         $statement = self::getInstance()->prepare($sql);
         $statement->execute([$this->id]);
-
     }
 }
