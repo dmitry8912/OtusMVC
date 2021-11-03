@@ -1,6 +1,6 @@
 <?php
 
-namespace Otus\Mvc\Models;
+namespace Otus\Mvc\Models\OtusORM;
 
 class Users extends Model
 {

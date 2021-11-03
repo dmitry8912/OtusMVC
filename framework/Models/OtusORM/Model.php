@@ -1,13 +1,15 @@
 <?php
-namespace Otus\Mvc\Models;
+namespace Otus\Mvc\Models\OtusORM;
+use PDO;
+
 abstract class Model
 {
     private static array $config = [
         'type' => 'mysql',
-        'host' => 'localhost',
+        'host' => 'db',
         'db' => 'mvc',
         'user' => 'root',
-        'password' => ''
+        'password' => 'root'
     ];
 
     private static $connectonInstance;
@@ -15,13 +17,14 @@ abstract class Model
     private static function getInstance() {
         if(self::$connectonInstance === null)
         {
-            self::$connectonInstance = new \PDO(sprintf("%s:host=%s;dbname=%s",
+            self::$connectonInstance = new PDO(sprintf("%s:host=%s;dbname=%s",
                                                         self::$config['type'],
                                                         self::$config['host'],
                                                         self::$config['db']),
                 self::$config['user'],
                 self::$config['password'],
                 [
+                    // При возврате результатов запроса - возвращать в виде ассоциативного массива
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES   => false,
                     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION
@@ -46,7 +49,7 @@ abstract class Model
         $modelName = static::class;
         $model = new $modelName();
         $tableName = self::getTableName();
-        $sql = "SELECT * FROM $tableName where username = ? limit 1";
+        $sql = "SELECT * FROM $tableName where $parameter = ? limit 1";
         $statement = self::getInstance()->prepare($sql);
         $statement->execute([$value]);
         $result = $statement->fetchAll();
