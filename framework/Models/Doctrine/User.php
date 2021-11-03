@@ -37,4 +37,6 @@ class User
     public function getId() : int { return $this->id; }
     public function getName() : string { return $this->username; }
     public function getEmail() : string { return $this->email; }
+    public function getInfo() : string { return $this->info; }
+    public function setInfo($info) : void { $this->info = $info; }
 }
