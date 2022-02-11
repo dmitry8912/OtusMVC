@@ -1,9 +1,9 @@
 <?php
     return [
-        'driver' => 'pdo_mysql',
+        'driver' => 'mysql',
         'host' => 'db',
         'port' => 3306,
-        'db' => 'mvc',
+        'db' => 'otus',
         # for doctrine
         'dbname' => 'mvc',
         'user' => 'root',

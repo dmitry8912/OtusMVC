@@ -16,7 +16,7 @@ services:
     volumes:
       - ./framework:/var/www/app
   db:
-    image: mysql
+    image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3386:3306"

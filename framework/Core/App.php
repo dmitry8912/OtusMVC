@@ -35,7 +35,6 @@ class App
             }
         }
 
-
         // Check controller exists.
         if(!class_exists($controller_name,true)) {
             //redirect to 404

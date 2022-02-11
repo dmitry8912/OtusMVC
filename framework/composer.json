@@ -22,5 +22,10 @@
       "Otus\\Mvc\\Models\\": "Models/",
       "Otus\\Mvc\\Views\\": "Views/"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true
+    }
   }
 }
