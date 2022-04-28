@@ -11,6 +11,7 @@ use PDO;
 class IndexController
 {
     public function index() {
+        /*
         // Прежде всего нам надо получить объект EntityManager и работать с ним, лучше бы его также сделать в виде Singletone, чтобы вызов bootDoctrine() не возвращал каждый раз новый объект entityManager
         $manager = Database::bootDoctrine();
         // Пример работы c Doctrine
@@ -44,11 +45,11 @@ class IndexController
         foreach(Database::bootDoctrine()->getRepository('Otus\Mvc\Models\Doctrine\User')->findAll() as $u)
         {
             echo $u->getName()."-".$u->getInfo()."<br>";
-        }
+        }*/
 
-        /*View::render('info',[
+        View::render('info',[
             'title' => 'Index page',
             'name' => 'Anonymous user'
-        ]);*/
+        ]);
     }
 }

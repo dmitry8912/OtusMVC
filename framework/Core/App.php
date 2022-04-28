@@ -11,7 +11,7 @@ class App
 
     public static function run()
     {
-        Database::bootEloquent();
+        //Database::bootEloquent();
 
         $controller_name = "Otus\\Mvc\\Controllers\\IndexController";
         $action_name = "index";
