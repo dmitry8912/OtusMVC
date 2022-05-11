@@ -12,6 +12,7 @@ services:
   php-fpm:
     image: php:8-fpm
     build:
+      context: .
       dockerfile: Dockerfile
     volumes:
       - ./framework:/var/www/app
