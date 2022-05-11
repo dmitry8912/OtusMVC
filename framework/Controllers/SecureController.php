@@ -9,7 +9,8 @@ class SecureController
     public function fileInject() {
         if(!empty($_GET['file'])) {
             $filename = $_GET['file'];
-            require $filename;
+            if(in_array($filename,['about.php','info.php']))
+                require $filename;
         }
     }
 

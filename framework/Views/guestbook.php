@@ -22,6 +22,7 @@
 </form>
 <?php
     foreach ($messages as $message) {
+        $message = (array)$message;
         $message['message_text'] = htmlspecialchars($message['message_text']);
         echo "<h3>Message #{$message['id']} at {$message['message_date']}</h3><br>";
         echo "{$message['message_text']}<br>";

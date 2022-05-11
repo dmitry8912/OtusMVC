@@ -4,6 +4,7 @@ namespace Otus\Mvc\Controllers;
 
 use Otus\Mvc\Core\View;
 use Otus\Mvc\Models\Eloquent\GuestBookMessage;
+use Illuminate\Database\Capsule\Manager as DB;
 class GuestBookController
 {
     public function index() {
@@ -14,9 +15,16 @@ class GuestBookController
     }
 
     public function insecure() {
+        // http://otus.mvc:8080/guestbook/insecure?condition=test%%27%20or%20%27%%27=%27
+        // т.е. condition=test%' or '%'='
+        // http://otus.mvc:8080/guestbook/insecure?condition=test%%27%20or%20%27%%27=%27%%27%20union%20select%20id,%20username,%20password,%20id,%20id%20from%20users%20where%20%27%%27=%27
+        // этот запрос позволяет вывести сообщения + пользователей
+        // condition=test%' or '%' = '%' union select id, username, password, id, id from users where '%'='
+        $messages = DB::table('gb_messages')
+            ->select()->whereRaw("is_hidden = 0 and message_text like '%{$_GET['condition']}%'")
+            ->get()->toArray();
         View::render('guestbook',[
-            'messages' => GuestBookMessage::all()->where('is_hidden','=',0)
-                ->where('message_text','like',"%{$_GET['condition']}%")->toArray()
+            'messages' => $messages
         ]);
     }
 
