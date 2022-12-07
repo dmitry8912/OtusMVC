@@ -6,7 +6,7 @@ services:
       - "8080:80"
     volumes:
       - ./framework:/var/www/app
-      - ./nginx-site.conf:/etc/nginx/conf.d/docker.conf
+      - ./nginx-site.conf:/etc/nginx/conf.d/default.conf
     links:
       - php-fpm
   php-fpm:

@@ -1,19 +1,14 @@
 <?php
 
 namespace Otus\Mvc\Core;
-
+use \Otus\Mvc\Core\Config;
 class App
 {
-    protected static $routes = [
-        'lessons/linux-specialization' => ['Lessons','linux'],
-        'linux-spec' => ['Lessons','linux']
-    ];
+    protected static $routes = [];
 
     public static function run()
     {
-        //Database::bootEloquent();
-
-        $controller_name = "Otus\\Mvc\\Controllers\\IndexController";
+        $controller_name = "Otus\\Mvc\\Controllers\\AuthController";
         $action_name = "index";
 
         $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
@@ -35,7 +30,6 @@ class App
             }
         }
 
-
         // Check controller exists.
         if(!class_exists($controller_name,true)) {
             //redirect to 404
@@ -46,6 +40,8 @@ class App
             //redirect to 404
             View::render('404');
         }
+
+        Database::bootEloquent(Config::getInstance());
 
         $controller = new $controller_name();
         $controller->$action_name();
